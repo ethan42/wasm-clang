@@ -803,8 +803,7 @@ class API {
     await this.link(obj, wasm);
 
     const buffer = this.memfs.getFileContents(wasm);
-    const testMod = await this.hostLogAsync(`Compiling ${wasm}`,
-                                            WebAssembly.compile(buffer));
+    const testMod = await WebAssembly.compile(buffer); // await this.hostLogAsync(`Compiling ${wasm}`, WebAssembly.compile(buffer));
     return await this.run(testMod, wasm);
   }
 }
