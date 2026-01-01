@@ -779,13 +779,12 @@ class API {
   }
 
   async run(module, ...args) {
-    this.hostLog(`${args.join(' ')}\n`);
+    this.hostLog(`${args.join(' ')}`);
     const start = +new Date();
     const app = new App(module, this.memfs, ...args);
     const instantiate = +new Date();
     const stillRunning = await app.run();
     const end = +new Date();
-    this.hostWrite('\n');
     if (this.showTiming) {
       const green = '\x1b[92m';
       const normal = '\x1b[0m';
@@ -797,9 +796,9 @@ class API {
   }
 
   async compileLinkRun(contents) {
-    const input = `test.cc`;
-    const obj = `test.o`;
-    const wasm = `test.wasm`;
+    const input = `main.c`;
+    const obj = `main.o`;
+    const wasm = `main.wasm`;
     await this.compile({input, contents, obj});
     await this.link(obj, wasm);
 
